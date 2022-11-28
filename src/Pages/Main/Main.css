@@ -1,0 +1,21 @@
+#navtabs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+
+#logout{
+    background-color: black;
+    color: white;
+}
+
+#tab-page-container {
+    /* display: block; */
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    /* position: absolute; */
+}

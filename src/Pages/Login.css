@@ -1,53 +1,50 @@
-#main{
+#main {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
 }
 
-#container{
+#container {
     display: flex;
     flex-direction: column;
-    justify-content:space-around;
+    justify-content: space-around;
     align-items: center;
     padding-top: 2%;
-    background-color:whitesmoke;
+    background-color: whitesmoke;
     border-radius: 10px;
     box-sizing: border-box;
     padding: 10px;
-    
+
 }
-#label{
+
+#label {
     align-self: flex-start;
     font-size: medium;
     font-weight: bold;
     padding-bottom: 10px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 
 
-#input{
+#input {
     padding: 5px;
     font-size: medium;
     width: 80%;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-#button{
+#button {
     background-color: black;
     color: whitesmoke;
     margin-top: 10px;
     align-self: center;
 
-    
+
 }
 
-#error{
-    color: red;
-    font-size: small;
-    font-weight: bold;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 5px;
+#error {
+    margin-top: 5px;
     transition: all 2s ease-in-out;
 }

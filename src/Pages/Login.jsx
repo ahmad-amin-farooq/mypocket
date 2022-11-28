@@ -6,10 +6,10 @@ import Fade from "react-reveal/Fade";
 import pb from "../helper/Pocketbase";
 import { Grid } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "@fluentui/react-components/unstable";
 
 
 export default function Login() {
-
   const navigate = useNavigate();
   const [secureCode, setSecureCode] = useState("");
   const [logStatus, setLogStatus] = useState({
@@ -17,7 +17,6 @@ export default function Login() {
     message: "",
   });
   const [isPending, setLoading] = useState(false);
-
 
   const login = async () => {
     if (secureCode.length !== 0) {
@@ -45,7 +44,6 @@ export default function Login() {
     }
   };
 
-  
   return (
     <div id="main">
       <Fade top>
@@ -67,9 +65,9 @@ export default function Login() {
             }}
           />
           {logStatus.status ? null : (
-            <Text id="error" size="medium">
+            <Alert intent="error" id="error">
               {logStatus.message}
-            </Text>
+            </Alert>
           )}
           <Button id="button" size="large" onClick={login} disabled={isPending}>
             {isPending ? (
