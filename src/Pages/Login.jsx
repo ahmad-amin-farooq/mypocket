@@ -1,10 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { Button, Input, Label, Text } from "@fluentui/react-components";
 import { AiTwotoneLock } from "react-icons/ai";
 import "./Login.css";
 import Fade from "react-reveal/Fade";
+import pb from "../helper/Pocketbase";
+import { Grid } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
+
+
 export default function Login() {
-  const [secureCode, setSecureCode] = useState(0);
+
+  const navigate = useNavigate();
+  const [secureCode, setSecureCode] = useState("");
+  const [logStatus, setLogStatus] = useState({
+    status: true,
+    message: "",
+  });
+  const [isPending, setLoading] = useState(false);
+
+
+  const login = async () => {
+    if (secureCode.length !== 0) {
+      try {
+        setLoading(true);
+        const authData = await pb
+          .collection("users")
+          .authWithPassword("notaaf", secureCode);
+        if (authData) {
+          window.location.reload(true);
+        }
+        setLoading(false);
+      } catch (err) {
+        setLogStatus({
+          status: false,
+          message: String(err).split(":")[1],
+        });
+        setLoading(false);
+      }
+    } else {
+      setLogStatus({
+        status: false,
+        message: "Please enter a secure code",
+      });
+    }
+  };
+
+  
   return (
     <div id="main">
       <Fade top>
@@ -19,9 +60,31 @@ export default function Login() {
             onChange={(x) => {
               setSecureCode(x.target.value);
             }}
+            onKeyPress={async (e) => {
+              if (e.key === "Enter") {
+                await login();
+              }
+            }}
           />
-          <Button id="button" size="large" onClick={() => {}}>
-            Login
+          {logStatus.status ? null : (
+            <Text id="error" size="medium">
+              {logStatus.message}
+            </Text>
+          )}
+          <Button id="button" size="large" onClick={login} disabled={isPending}>
+            {isPending ? (
+              <Grid
+                id="loader"
+                color="#fff"
+                wrapperStyle={{
+                  padding: "5px",
+                }}
+                height={20}
+                width={20}
+              />
+            ) : (
+              "Login"
+            )}
           </Button>
         </div>
       </Fade>
